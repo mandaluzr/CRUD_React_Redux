@@ -16,7 +16,7 @@ const EditarProducto = () => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Nobre Producto"
+                    placeholder="Nombre Producto"
                     name="Nombre"
                   />
                 </div>

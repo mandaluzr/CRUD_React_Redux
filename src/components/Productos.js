@@ -1,9 +1,36 @@
-import React, { Fragment } from "react"; //imr si pones RAFCE se crea ambos juntos.
+// en los componentes tendremos que llamar a los action.
+import React, { Fragment, useEffect } from "react"; //imr si pones RAFCE se crea ambos juntos.
+import Producto from "./Producto";
+
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { obtenerProductosAction } from "../actions/productoActions";
 
 const Productos = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // consultar la Api
+    const cargarProductos = () => dispatch(obtenerProductosAction());
+    cargarProductos();
+  }, []);
+
+  // useSelector se usa para obtener el State.
+
+  const productos = useSelector((state) => state.productos.productos);
+  const error = useSelector((state) => state.productos.error);
+  const cargando = useSelector((state) => state.productos.loading);
+
   return (
     <Fragment>
       <h2 className="text-center my-5">Listado de productos</h2>
+
+      {error ? (
+        <p className="font-weight-bold alert alert-danger text-center mt-4">
+          Hubo un error
+        </p>
+      ) : null}
+      {cargando ? <p className="text-center">Cargando....</p> : null}
       <table className="table table-striped">
         <thead className="table table-striped">
           <tr>
@@ -13,7 +40,11 @@ const Productos = () => {
           </tr>
         </thead>
         <tbody>
-            
+          {productos.length === 0
+            ? "No hay productos"
+            : productos.map((producto) => (
+                <Producto key={producto.id} producto={producto} />
+              ))}
         </tbody>
       </table>
     </Fragment>
