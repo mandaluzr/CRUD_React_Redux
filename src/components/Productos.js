@@ -13,7 +13,7 @@ const Productos = () => {
     // consultar la Api
     const cargarProductos = () => dispatch(obtenerProductosAction());
     cargarProductos();
-  }, []);
+  }, []); //
 
   // useSelector se usa para obtener el State.
 
