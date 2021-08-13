@@ -14,7 +14,7 @@ import {
   OBTENER_PRODUCTO_EDITAR,
   COMENZAR_EDICION_PRODUCTO,
   PRODUCTO_EDITADO_EXITO,
-  PRODUCTO_EDITADO_ERROR
+  PRODUCTO_EDITADO_ERROR,
 } from "../types/index";
 
 import clienteAxios from "../config/axios";
@@ -103,13 +103,17 @@ export function borrarProductoAction(id) {
 
     try {
       await clienteAxios.delete(`/productos/${id}`);
-      dispatch( eliminarProductoExito() );
+      dispatch(eliminarProductoExito());
 
       // Si se elimina el producto -> Mostrar alerta.
-      Swal.fire("Eliminado!", "El producto se eliminó correctamente.", "success");
+      Swal.fire(
+        "Eliminado!",
+        "El producto se eliminó correctamente.",
+        "success"
+      );
     } catch (error) {
       console.log(error);
-      dispatch( eliminarProductoError() );
+      dispatch(eliminarProductoError());
     }
   };
 }
@@ -130,31 +134,32 @@ const eliminarProductoError = () => ({
 
 // colocar producto en edición (se coloca el proudcto en activo)
 export function obtenerProductoEditar(producto) {
-    return (dispatch) => {
-        dispatch( obtenerProductoEditarAction(producto) )
-    }
+  return (dispatch) => {
+    dispatch(obtenerProductoEditarAction(producto));
+  };
 }
 
 const obtenerProductoEditarAction = (producto) => ({
-    type: OBTENER_PRODUCTO_EDITAR,
-    payload: producto
+  type: OBTENER_PRODUCTO_EDITAR,
+  payload: producto,
 });
 
 // edita un registro en la api y State
 export function editarProductoAction(producto) {
-    return async (dispatch) => {
-        dispatch(editarProducto(producto));
+  return async (dispatch) => {
+    dispatch(editarProducto());
 
-        try {
-            const resultado = await clienteAxios.put(`/productos/${producto.id}`, producto); // API REST NOS DICE QUE TENEMOS QUE PASAR EL ID Y LUEGO EL PRODUCTO NUEVO.. CON LA NUEVA INFO.
-
-
-        } catch (error) {
-            
-        }
-    }
+    try {
+      await clienteAxios.put(`/productos/${producto.id}`, producto); // API REST NOS DICE QUE TENEMOS QUE PASAR EL ID Y LUEGO EL PRODUCTO NUEVO.. CON LA NUEVA INFO.
+      dispatch(editarProductoExito(producto));
+    } catch (error) {}
+  };
 }
-const editarProducto = (producto) => ({
-    type: COMENZAR_EDICION_PRODUCTO,
-    payload: producto
-})
+const editarProducto = () => ({
+  type: COMENZAR_EDICION_PRODUCTO,
+});
+
+const editarProductoExito = (producto) => ({
+  type: PRODUCTO_EDITADO_EXITO,
+  payload: producto,
+});

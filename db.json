@@ -3,7 +3,13 @@
     {
       "nombre": "probando El history",
       "precio": 100,
-      "id": 10
+      "id": 10,
+      "Nombre": [
+        "probando El histor"
+      ],
+      "Precio": [
+        "1001"
+      ]
     },
     {
       "nombre": "Producto prueba 30 de Julio",
@@ -13,7 +19,9 @@
     {
       "nombre": "ahora si papa!",
       "precio": 1234123,
-      "id": 12
+      "id": 12,
+      "Precio": "12341233",
+      "Nombre": "ahora si papa!3"
     }
   ]
 }

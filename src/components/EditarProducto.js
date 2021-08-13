@@ -1,19 +1,42 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux"; // useSelector para acceder al state y useDispatch para ejecutar acciones 
-import {editarProductoAction}from '../actions/productoActions';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"; // useSelector para acceder al state y useDispatch para ejecutar acciones
+import { editarProductoAction } from "../actions/productoActions";
+import { useHistory } from "react-router-dom";
 
 const EditarProducto = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  //nuevo state de producto
+  const [producto, setProducto] = useState({
+    nombre: "",
+    precio: "",
+  });
 
   // producto a editar
-  const producto = useSelector(state => state.productos.productoeditar);
-  if(!producto) return null;
-  const { nombre, precio, id } = producto;
+  const productoeditar = useSelector((state) => state.productos.productoeditar);
+
+  // llenar el state automáticamente con un useEffect
+  useEffect(() => {
+    setProducto(productoeditar);
+  }, [productoeditar]);
+
+  // leer los datos del formulario
+  const onChangeFormulario = (e) => {
+    setProducto({
+      ...producto,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const { nombre, precio } = producto;
 
   const submitEditarProducto = (e) => {
     e.preventDefault();
 
-    editarProductoAction(); // toma el nuevo producto
-  }
+    dispatch(editarProductoAction(producto)); // toma el nuevo producto
+    history.push("/");
+  };
 
   return (
     <div className="row justify-content-center">
@@ -24,9 +47,7 @@ const EditarProducto = () => {
               Editar Nuevo Producto
             </h2>
 
-            <form
-              onSubmit={submitEditarProducto}
-            >
+            <form onSubmit={submitEditarProducto}>
               <div className="form-group">
                 <label>Nombre Producto</label>
                 <input
@@ -35,6 +56,7 @@ const EditarProducto = () => {
                   placeholder="Nombre Producto"
                   name="Nombre"
                   value={nombre}
+                  onChange={onChangeFormulario}
                 />
               </div>
               <div className="form-group">
@@ -45,6 +67,7 @@ const EditarProducto = () => {
                   placeholder="Precio Producto"
                   name="Precio"
                   value={precio}
+                  onChange={onChangeFormulario}
                 />
               </div>
 
