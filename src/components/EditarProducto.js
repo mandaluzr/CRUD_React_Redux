@@ -21,15 +21,16 @@ const EditarProducto = () => {
     setProducto(productoeditar);
   }, [productoeditar]);
 
+  const { nombre, precio } = producto;
+
   // leer los datos del formulario
   const onChangeFormulario = (e) => {
     setProducto({
       ...producto,
-      [e.target.name]: e.target.value,
+      [e.target.name] : [e.target.value],
     });
   };
 
-  const { nombre, precio } = producto;
 
   const submitEditarProducto = (e) => {
     e.preventDefault();

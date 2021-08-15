@@ -132,7 +132,7 @@ const eliminarProductoError = () => ({
   payload: true,
 });
 
-// colocar producto en edición (se coloca el proudcto en activo)
+// colocar producto en edición (se coloca el producto en activo)
 export function obtenerProductoEditar(producto) {
   return (dispatch) => {
     dispatch(obtenerProductoEditarAction(producto));
@@ -147,7 +147,7 @@ const obtenerProductoEditarAction = (producto) => ({
 // edita un registro en la api y State
 export function editarProductoAction(producto) {
   return async (dispatch) => {
-    dispatch(editarProducto());
+    dispatch(editarProducto(producto));
 
     try {
       await clienteAxios.put(`/productos/${producto.id}`, producto); // API REST NOS DICE QUE TENEMOS QUE PASAR EL ID Y LUEGO EL PRODUCTO NUEVO.. CON LA NUEVA INFO.
@@ -155,8 +155,9 @@ export function editarProductoAction(producto) {
     } catch (error) {}
   };
 }
-const editarProducto = () => ({
+const editarProducto = (producto) => ({
   type: COMENZAR_EDICION_PRODUCTO,
+  payload: producto,
 });
 
 const editarProductoExito = (producto) => ({

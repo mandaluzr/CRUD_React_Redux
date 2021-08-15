@@ -4,9 +4,7 @@
       "nombre": "probando El history",
       "precio": 100,
       "id": 10,
-      "Nombre": [
-        "probando El histor"
-      ],
+      "Nombre": "probando El historyd",
       "Precio": [
         "1001"
       ]
@@ -21,7 +19,12 @@
       "precio": 1234123,
       "id": 12,
       "Precio": "12341233",
-      "Nombre": "ahora si papa!3"
+      "Nombre": "ahora si papa!s"
+    },
+    {
+      "nombre": "Hola ruperto",
+      "precio": 12356,
+      "id": 13
     }
   ]
 }
