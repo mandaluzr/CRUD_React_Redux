@@ -1,20 +1,6 @@
 {
   "productos": [
     {
-      "nombre": "probando El history",
-      "precio": 100,
-      "id": 10,
-      "Nombre": "probando El historyd",
-      "Precio": [
-        "1001"
-      ]
-    },
-    {
-      "nombre": "Producto prueba 30 de Julio",
-      "precio": 700,
-      "id": 11
-    },
-    {
       "nombre": "ahora si papa!",
       "precio": 1234123,
       "id": 12,
@@ -22,9 +8,22 @@
       "Nombre": "ahora si papa!s"
     },
     {
-      "nombre": "Hola ruperto",
+      "nombre": "IT WORKS",
       "precio": 12356,
-      "id": 13
+      "id": 13,
+      "Nombre": "IT WORK"
+    },
+    {
+      "nombre": "hola TaNCHO",
+      "precio": 451,
+      "id": 14,
+      "Nombre": "Prueba tinch",
+      "Precio": "4512"
+    },
+    {
+      "nombre": "Working with Redux",
+      "precio": 450,
+      "id": 15
     }
   ]
 }

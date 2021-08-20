@@ -13,7 +13,8 @@ const Productos = () => {
     // consultar la Api
     const cargarProductos = () => dispatch(obtenerProductosAction());
     cargarProductos();
-  }, []); // acá agregue el dispatch en el []
+    // eslint-disable-next-line
+  }, []);
 
   // useSelector se usa para obtener el State.
 
